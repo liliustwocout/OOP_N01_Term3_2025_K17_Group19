@@ -3,6 +3,10 @@ public class KhachHang {
     String TenKH;
     String MaKH;
     //Date NgaySinh;
+    //abcxyz
+
+
+
 
     //Phương thức hoat động đối tượng sản phẩm
     public String HienThiKhachHang(String MaSKH){
