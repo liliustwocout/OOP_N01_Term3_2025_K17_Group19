@@ -16,4 +16,6 @@ public class pichua2 {
                 System.out.println("Unknown Cake");
         }
     }
+
+    pichua2 pc2 = new pichua2();
 }
