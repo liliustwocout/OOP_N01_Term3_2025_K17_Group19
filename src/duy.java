@@ -1,1 +1,0 @@
-duy đẹp trai vcll 
