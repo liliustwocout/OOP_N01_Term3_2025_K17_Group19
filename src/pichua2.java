@@ -10,6 +10,8 @@ public class pichua2 {
             case 2:
                 System.out.println("Vanilla Cake");
                 break;
+            case 3:
+                System.out.println("Chocominto");
             default:
                 System.out.println("Unknown Cake");
         }
