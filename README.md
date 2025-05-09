@@ -20,8 +20,8 @@ Thuộc tính: Loại vật phẩm (hồi máu, tăng tốc độ, chìa khóa..
 Hành vi: Nằm cố định trên bản đồ, biến mất khi được nhặt, kích hoạt hiệu ứng hỗ trợ cho người chơi.
 
 
-III - Cấu trúc Folder
-Gồm có 2 folder: scr (source code), res (resource).
+III - Cấu trúc Folder.
+- Gồm có 2 folder: scr (source code), res (resource).
 Trong scr gồm có các lớp:
 - characters: Class cho nhân vật, kẻ thù
 - items: Class cho vật phẩm
