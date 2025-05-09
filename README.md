@@ -21,7 +21,9 @@ Hành vi: Nằm cố định trên bản đồ, biến mất khi được nhặt
 
 
 III - Cấu trúc Folder.
-- Gồm có 2 folder: scr (source code), res (resource).
+
+Gồm có 2 folder: scr (source code), res (resource).
+
 Trong scr gồm có các lớp:
 - characters: Class cho nhân vật, kẻ thù
 - items: Class cho vật phẩm
