@@ -1,6 +1,6 @@
 # Group9
 I - Tiêu đề
-Thiết kế và phát triển Game 2D Phiêu lưu: 
+Thiết kế và phát triển Game 2D Phiêu lưu: Lạc Trong Rừng Cấm
 
 
 II - Đối tượng
