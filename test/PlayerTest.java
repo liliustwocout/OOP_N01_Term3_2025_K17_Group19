@@ -1,4 +1,3 @@
-// src/tests/PlayerTest.java
 package test;
 
 import characters.Player;
