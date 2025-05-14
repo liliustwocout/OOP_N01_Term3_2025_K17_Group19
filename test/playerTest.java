@@ -1,11 +1,9 @@
-// src/tests/PlayerTest.java
+
 package test;
 
 import characters.Player;
 
-
-public class PlayerTest {
-
+public class playerTest {
     
     public void testTakeDamage() {
         Player p = new Player("Hero", 100, 0, 0);
