@@ -35,4 +35,34 @@ Trong res gồm có:
 - sounds: âm thanh
 - maps: bản đồ
 
+IV - P4
+1. Giao diện:
+Sử dụng Java Spring Boot với Thymeleaf hoặc REST API + Swagger/Postman để thao tác CRUD.
+
+2. Chức năng quản lý nhân vật (Đối tượng 01: Character)
+Thêm, sửa, xoá nhân vật (tên, level, HP, MP, class như "warrior", "mage")
+
+Liệt kê danh sách nhân vật
+
+Lọc theo class, level, giới tính...
+
+3. Chức năng quản lý bản đồ (Đối tượng 02: Map)
+Thêm, sửa, xoá bản đồ (tên map, loại map: rừng, hang động, thành phố)
+
+Gán nhân vật cho bản đồ (nhân vật đang ở đâu)
+
+4. Chức năng quản lý nhiệm vụ (Đối tượng 03: Quest)
+Thêm, sửa, xoá nhiệm vụ (tiêu đề, mô tả, phần thưởng)
+
+Gán nhiệm vụ cho nhân vật
+
+5. Chức năng mở rộng (tuỳ chọn):
+Tìm nhân vật có level cao nhất
+
+Thống kê số nhân vật trên từng bản đồ
+
+Xuất dữ liệu sang JSON hoặc file CSV
+
+Lưu checkpoint (bản đồ + nhiệm vụ + trạng thái nhân vật)
+
 
