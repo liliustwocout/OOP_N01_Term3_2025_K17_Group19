@@ -1,4 +1,4 @@
-# Group9
+![image](https://github.com/user-attachments/assets/c266ed67-506c-4e79-92d8-d5d970d4d847)# Group9
 I - Tiêu đề
 Thiết kế và phát triển Game 2D Phiêu lưu: Lạc Trong Rừng Cấm
 
@@ -71,7 +71,10 @@ Lưu checkpoint (bản đồ + nhiệm vụ + trạng thái nhân vật)
 
 
 **BEHAVIOUR**
-![image](https://github.com/user-attachments/assets/21d1a902-d473-416d-a994-354b4ac2f649)
-![image](https://github.com/user-attachments/assets/17d503c9-8c13-40dd-9270-72dd5a5bd261)
+![image](https://github.com/user-attachments/assets/c5dd29c4-d28f-420c-b83f-898f73b549a8)
+![image](https://github.com/user-attachments/assets/748f6d2d-51d5-4fa9-8a2d-ec5c6486496a)
+![image](https://github.com/user-attachments/assets/798d4714-876f-4c1d-8de6-015ce37a52c1)
+
+
 
 
