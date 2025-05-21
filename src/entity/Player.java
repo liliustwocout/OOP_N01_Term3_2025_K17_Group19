@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -16,6 +17,7 @@ public class Player extends Entity{
     public final int screenX;
     public final int screenY;
     public int hasKey = 0;
+    int standCounter = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -45,35 +47,43 @@ public class Player extends Entity{
 
     public void getPlayerImage() {
 
+        up1 = setup("girl_up_1");
+        up2 = setup("girl_up_2");
+        down1 = setup("girl_up_1");
+        down2 = setup("girl_up_2");
+        left1 = setup("girl_left_1");
+        left2 = setup("girl_left_2");
+        right1 = setup("girl_right_1");
+        right2 = setup("girl_right_2");
+    }
+
+    public BufferedImage setup(String imageName){
+
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
         try {
 
-            up1 = ImageIO.read(getClass().getResourceAsStream("/player/a.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/player/a.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/player/girl_right_1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/player/girl_right_2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/player/vlad_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/player/vlad_left_2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/player/vlad_right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/player/vlad_right_2.png"));
+            image = ImageIO.read(getClass().getResourceAsStream("/player/" + imageName + ".png"));
+            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
 
-        } catch (IOException e){
+
+        }catch (IOException e){
             e.printStackTrace();
         }
+        return image;
     }
 
     public void update() {
 
-        if(keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true){
-            if(keyH.upPressed == true){
+        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
+            if (keyH.upPressed) {
                 direction = "up";
-            }
-            else if(keyH.downPressed == true) {
+            } else if (keyH.downPressed) {
                 direction = "down";
-            }
-            else if(keyH.leftPressed == true) {
+            } else if (keyH.leftPressed) {
                 direction = "left";
-            }
-            else if(keyH.rightPressed == true) {
+            } else if (keyH.rightPressed) {
                 direction = "right";
             }
 
@@ -84,18 +94,24 @@ public class Player extends Entity{
             // CHECK OBJECT COLLISION
             int objIndex = gp.cChecker.checkObject(this, true);
             pickUpObject(objIndex);
+        } else {
 
-            // IF COLLISION IS FALSE, PLAYER CAN MOVE
-            if(collisionOn == false){
-
-                switch (direction){
-                    case "up": worldY -= speed; break;
-                    case "down": worldY += speed; break;
-                    case "left": worldX -= speed; break;
-                    case "right": worldX += speed; break;
-                }
+            standCounter++;
+            if (standCounter == 20) {
+                spriteNum = 1;
+                standCounter = 0;
             }
+        }
 
+        // IF COLLISION IS FALSE, PLAYER CAN MOVE
+        if(!collisionOn){
+
+            switch (direction){
+                case "up": worldY -= speed; break;
+                case "down": worldY += speed; break;
+                case "left": worldX -= speed; break;
+                case "right": worldX += speed; break;
+            }
             spriteCounter++;
             if(spriteCounter > 12){
                 if(spriteNum == 1){
@@ -107,8 +123,11 @@ public class Player extends Entity{
                 spriteCounter = 0;
             }
         }
-    }
+        collisionOn = true;
 
+
+    }
+    
     public void pickUpObject(int i) {
 
         if(i != 999) {
@@ -186,8 +205,10 @@ public class Player extends Entity{
                 }
                 break;
         }
-        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-        // Show solid
+        g2.drawImage(image, screenX, screenY,null);
+
+
+        //Show solid
         //g2.setColor(Color.red);
         //g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
 
