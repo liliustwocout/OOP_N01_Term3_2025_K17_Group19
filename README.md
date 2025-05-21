@@ -72,4 +72,6 @@ Lưu checkpoint (bản đồ + nhiệm vụ + trạng thái nhân vật)
 
 **BEHAVIOUR**
 ![image](https://github.com/user-attachments/assets/21d1a902-d473-416d-a994-354b4ac2f649)
+![image](https://github.com/user-attachments/assets/17d503c9-8c13-40dd-9270-72dd5a5bd261)
+
 
