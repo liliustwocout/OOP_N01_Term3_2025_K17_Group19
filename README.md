@@ -65,4 +65,5 @@ Xuất dữ liệu sang JSON hoặc file CSV
 
 Lưu checkpoint (bản đồ + nhiệm vụ + trạng thái nhân vật)
 
+![image](https://github.com/user-attachments/assets/68b6fc70-5e0b-4a1c-a9c4-efb157201752)
 
