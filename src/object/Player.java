@@ -1,27 +1,11 @@
-// src/characters/Player.java
 package object;
 
 public class Player {
-    public String name;
-    public int health;
-    private int x, y;
+    String name;
+    int playerId;
 
-    public Player(String name, int health, int x, int y) {
+    public Player(String name, int id) {
         this.name = name;
-        this.health = health;
-        this.x = x;
-        this.y = y;
-    }
-
-    public void move(String direction) {
-        System.out.println(name + " is moving " + direction);
-    }
-
-    public void attack() {
-        System.out.println(name + " attacks!");
-    }
-
-    public void takeDamage(int amount) {
-        health -= amount;
+        this.playerId = id;
     }
 }

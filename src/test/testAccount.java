@@ -12,9 +12,9 @@ public class testAccount {
     public void testEditDelete() {
 
         ArrayList<Account> sl = new ArrayList<Account>();
-        Account s1 = new Account("Nguyen Thi Lan Anh", 12345);
-        Account s2 = new Account("Tran Van Minh", 2);
-        Account s3 = new Account("Nguyen An", 101010);
+        Account s1 = new Account("Lilius", 269205);
+        Account s2 = new Account("Hoiah", 292005);
+        Account s3 = new Account("Duynhat", 696969);
 
         sl.add(s1);
         sl.add(s2);
@@ -32,20 +32,20 @@ public class testAccount {
         int s = accountID.nextInt();
 
         System.out.println("Enter student name");
-        Scanner name = new Scanner(System.in); // Create a Scanner object
+        Scanner name = new Scanner(System.in); 
+        // Create a Scanner object
         String newName = name.nextLine();
 
         accList.getEditAccounts(newName, s);
         accList.printAccountList();
         System.out.print("test xoa:");
 
-       
         System.out.println("Enter account ID");
         Scanner ID = new Scanner(System.in);
 
         int studentDel = ID.nextInt();
         accList.getDeleteAccounts(studentDel);
-        System.out.print("danh sach sau khi xoa:");
+        System.out.print("danh sach sau khi xoa: \n");
         accList.printAccountList();
        
     }
