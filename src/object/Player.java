@@ -1,8 +1,8 @@
 // src/characters/Player.java
-package characters;
+package object;
 
 public class Player {
-    private String name;
+    public String name;
     public int health;
     private int x, y;
 

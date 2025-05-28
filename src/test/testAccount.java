@@ -1,5 +1,10 @@
+package test;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import object.Account;
+import object.AccountList;
 
 public class testAccount {
     ArrayList<Account> sl = new ArrayList<Account>();
@@ -24,19 +29,14 @@ public class testAccount {
 
         System.out.println("Enter student ID");
         Scanner accountID = new Scanner(System.in);
-
         int s = accountID.nextInt();
 
         System.out.println("Enter student name");
-
         Scanner name = new Scanner(System.in); // Create a Scanner object
-
         String newName = name.nextLine();
 
         accList.getEditAccounts(newName, s);
-
         accList.printAccountList();
-
         System.out.print("test xoa:");
 
        

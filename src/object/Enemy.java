@@ -1,5 +1,5 @@
 // src/characters/Enemy.java
-package characters;
+package object;
 
 public class Enemy {
     private String name;
