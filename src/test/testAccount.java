@@ -27,11 +27,11 @@ public class testAccount {
 
         // cap nhat thong tin
 
-        System.out.println("Enter student ID");
+        System.out.println("Enter account ID");
         Scanner accountID = new Scanner(System.in);
         int s = accountID.nextInt();
 
-        System.out.println("Enter student name");
+        System.out.println("Enter account name");
         Scanner name = new Scanner(System.in); 
         // Create a Scanner object
         String newName = name.nextLine();
