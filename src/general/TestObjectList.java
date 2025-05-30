@@ -13,9 +13,9 @@ public class TestObjectList {
         accountList.add(new Account(1, "Alice"));
         accountList.add(new Account(2, "Lilius"));
         accountList.add(new Account(3, "Hoiah"));
-        playerList.add(new Player(1, "Bob"));
-        playerList.add(new Player(2, "Lili"));
-        playerList.add(new Player(3, "Duynqu"));
+        playerList.add(new Player(1, "Bob", 5));
+        playerList.add(new Player(2, "Lili", 20));
+        playerList.add(new Player(3, "Duy", 10));
         enemyList.add(new Enemy(1, "Boss"));
         enemyList.add(new Enemy(2, "Slime"));
 
