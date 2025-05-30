@@ -1,27 +1,19 @@
-// src/characters/Player.java
 package object;
 
-public class Player {
-    public String name;
-    public int health;
-    private int x, y;
+import general.ObjectGeneral;
 
-    public Player(String name, int health, int x, int y) {
-        this.name = name;
-        this.health = health;
-        this.x = x;
-        this.y = y;
+public class Player extends ObjectGeneral {
+    private int level;
+
+    public Player(int id, String name, int level) {
+        super(id, name);
+        this.level = level;
+
     }
 
-    public void move(String direction) {
-        System.out.println(name + " is moving " + direction);
+    public int getLevel(){
+        return level;
     }
 
-    public void attack() {
-        System.out.println(name + " attacks!");
-    }
-
-    public void takeDamage(int amount) {
-        health -= amount;
-    }
+    
 }

@@ -12,9 +12,8 @@ public class AccountList {
     public void themTaiKhoan(Account acc) {
         danhSachTaiKhoan.add(acc);
     }
-
     public void hienThiDanhSachTaiKhoan() {
-        System.out.println(" Danh sách tài khoản đã đăng ký ");
+        System.out.println(" Danh sách tài khoản đã đăng ký: ");
         for (Account acc : danhSachTaiKhoan) {
             acc.hienThiThongTin();
         }
