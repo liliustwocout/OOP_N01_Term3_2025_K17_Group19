@@ -1,6 +1,8 @@
 package general;
 import java.util.ArrayList;
 
+import object.Player;
+
 public class ObjectList<T extends ObjectGeneral> {
     private ArrayList<T> list = new ArrayList<>();
 
@@ -55,4 +57,16 @@ public class ObjectList<T extends ObjectGeneral> {
             System.out.println("Lỗi khi xóa: " + e.getMessage());
         }
     }
+
+    public void showHighLevelPlayers(int levelThreshold) {
+    for (ObjectGeneral obj : list) {
+        if (obj instanceof Player) {
+            Player p = (Player) obj;
+            if (p.getLevel() >= levelThreshold) {
+                System.out.println(p);
+                }
+            }
+        }
+    }
+
 }

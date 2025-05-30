@@ -29,11 +29,16 @@ public class TestObjectList {
         enemyList.readAll();
 
         System.out.println("\n=== Cập nhật tên Player ===");
-        playerList.update(2, "PlayerBob");
+        playerList.update(2, "BopBop");
         playerList.readAll();
 
         System.out.println("\n=== Xóa Enemy ===");
         enemyList.delete(1);
         enemyList.readAll();
+
+        int levelThreshold = 10;
+        System.out.println("\n=== Hiển thị Player level >= " + levelThreshold + " ===");
+        playerList.showHighLevelPlayers(levelThreshold);
+
     }
 }
