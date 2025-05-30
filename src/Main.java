@@ -1,12 +1,7 @@
-import test.testPlayer;
-import test.testAccount;
+import test.testAccountList;
 
 public class Main {
-    
-    public static void main(String[] args){
-        testAccount ts = new testAccount();
-        ts.testEditDelete();
-        testPlayer p = new testPlayer();
-        
+    public static void main(String[] args) {
+        testAccountList.main(args);
     }
 }

@@ -24,4 +24,14 @@ public class Enemy {
     public void takeDamage(int amount) {
         health -= amount;
     }
+
+    public void displayInfo() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'displayInfo'");
+    }
+
+    public int attack() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'attack'");
+    }
 }
