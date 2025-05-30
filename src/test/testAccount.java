@@ -12,9 +12,9 @@ public class testAccount {
     public void testEditDelete() {
 
         ArrayList<Account> sl = new ArrayList<Account>();
-        Account s1 = new Account("Lilius", 269205);
-        Account s2 = new Account("Hoiah", 292005);
-        Account s3 = new Account("Duynhat", 696969);
+        Account s1 = new Account(269205, "Lilius");
+        Account s2 = new Account(292005, "Hoiah");
+        Account s3 = new Account(696969, "Duynhat");
 
         sl.add(s1);
         sl.add(s2);

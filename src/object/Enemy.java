@@ -1,11 +1,9 @@
 package object;
 
-public class Enemy {
-    String type;
-    int enemyId;
+import general.ObjectGeneral;
 
-    public Enemy(String type, int id) {
-        this.type = type;
-        this.enemyId = id;
+public class Enemy extends ObjectGeneral {
+    public Enemy(int id, String name) {
+        super(id, name);
     }
 }

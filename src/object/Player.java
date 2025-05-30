@@ -1,11 +1,9 @@
 package object;
 
-public class Player {
-    String name;
-    int playerId;
+import general.ObjectGeneral;
 
-    public Player(String name, int id) {
-        this.name = name;
-        this.playerId = id;
+public class Player extends ObjectGeneral {
+    public Player(int id, String name) {
+        super(id, name);
     }
 }

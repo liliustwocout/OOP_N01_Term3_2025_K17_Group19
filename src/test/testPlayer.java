@@ -6,9 +6,9 @@ import object.PlayerList;
 
 public class testPlayer {
     public void testEditDelete() {
-        Player p1 = new Player("Knight", 101);
-        Player p2 = new Player("Mage", 102);
-        Player p3 = new Player("Archer", 103);
+        Player p1 = new Player(101, "Knight");
+        Player p2 = new Player(102, "Mage");
+        Player p3 = new Player(103, "Archer");
 
         PlayerList pl = new PlayerList();
         pl.addPlayer(p1);

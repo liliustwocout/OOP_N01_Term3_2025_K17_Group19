@@ -6,9 +6,9 @@ import object.EnemyList;
 
 public class testEnemy {
     public void testEditDelete() {
-        Enemy e1 = new Enemy("Goblin", 201);
-        Enemy e2 = new Enemy("Orc", 202);
-        Enemy e3 = new Enemy("Dragon", 203);
+        Enemy e1 = new Enemy(201, "Goblin");
+        Enemy e2 = new Enemy(202, "Orc");
+        Enemy e3 = new Enemy(203, "Dragon");
 
         EnemyList el = new EnemyList();
         el.addEnemy(e1);

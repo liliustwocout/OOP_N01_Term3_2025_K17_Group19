@@ -1,11 +1,9 @@
 package object;
 
-public class Account {
-    String nameAcc;
-    int accId;
+import general.ObjectGeneral;
 
-    public Account(String name, int id){
-        nameAcc = name;
-        accId = id;
+public class Account extends ObjectGeneral {
+    public Account(int id, String name) {
+        super(id, name);
     }
 }
