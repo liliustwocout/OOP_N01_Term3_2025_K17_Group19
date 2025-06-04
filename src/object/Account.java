@@ -1,9 +1,23 @@
 package object;
 
-import general.ObjectGeneral;
+public class Account {
+    private String username;
+    private String email;
 
-public class Account extends ObjectGeneral {
-    public Account(int id, String name) {
-        super(id, name);
+    public Account(String username, String email) {
+        this.username = username;
+        this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void hienThiThongTin() {
+        System.out.println("Username: " + username + ", Email: " + email);
     }
 }

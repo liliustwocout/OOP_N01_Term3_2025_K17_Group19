@@ -1,5 +1,12 @@
-# Group 9
-I - Tiêu đề
+# Group 9 — Dự án Game 2D
+
+## Thành viên 👥
+- **Lê Phạm Thành Đạt** — 23010541  
+- **Bùi Hoài Anh** — 23010294  
+- **Đỗ Văn Duy** — 23017211  
+
+---
+**I - Tiêu đề**
 Thiết kế và phát triển Game 2D Phiêu lưu: Lạc Trong Rừng Cấm
 
 **CLASS DIAGRAM**
