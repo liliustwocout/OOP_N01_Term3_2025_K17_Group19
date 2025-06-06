@@ -33,6 +33,6 @@ public class testEnemy {
         // System.out.println("After deletion:");
         // el.printEnemies();
 
-        e1.take
+        e1.takeDamage(10);
     }
 }
