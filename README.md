@@ -87,6 +87,43 @@ Xuất dữ liệu sang JSON hoặc file CSV
 
 Lưu checkpoint (bản đồ + nhiệm vụ + trạng thái nhân vật)
 
+**Phân tích chức năng chính thành các chức năng nhỏ**
+Đạt	Viết class Player và thêm thuộc tính level, viết phương thức showHighLevelPlayers(int level)
+Duy	Tạo danh sách các Player và thêm dữ liệu demo
+Hoài Anh	Thực hiện kiểm thử chức năng trong file TestObjectList
+
+**Lưu đồ thuật toán (Flowchart)**
++-------------------------------+
+| Nhập ngưỡng level (threshold)|
++-------------------------------+
+              |
+              v
++-------------------------------+
+| Duyệt từng đối tượng trong    |
+| danh sách Player              |
++-------------------------------+
+              |
+              v
++-------------------------------+
+| Player có level >= threshold?|
++-------------------------------+
+        | YES            | NO
+        v                v
++-----------------+     (Bỏ qua)
+| Hiển thị Player |
++-----------------+
+        |
+        v
++-------------------------+
+| Tiếp tục đến Player sau|
++-------------------------+
+        |
+        v
++----------------------+
+|   Kết thúc chương trình |
++----------------------+
+
+
 
 
 
