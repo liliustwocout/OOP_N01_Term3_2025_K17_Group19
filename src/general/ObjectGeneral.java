@@ -3,6 +3,10 @@ package general;
 public class ObjectGeneral {
     protected int id;
     public String name;
+<<<<<<< HEAD
+=======
+    
+>>>>>>> c3c0a1817899fe998fa9532f4b9e08f14e1650c2
 
     public ObjectGeneral(int id, String name) {
         this.id = id;

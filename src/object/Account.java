@@ -1,5 +1,7 @@
 package object;
 
+import java.util.ArrayList;
+
 public class Account {
     private int username;
     private String email;
@@ -19,5 +21,12 @@ public class Account {
 
     public void hienThiThongTin() {
         System.out.println("Username: " + username + ", Email: " + email);
+    }
+
+    public void DanhSachTaiKhoanDangKy(ArrayList<Account> listAccount) {
+        System.out.println(" Danh sách tài khoản đã đăng ký:");
+        for (Account acc : listAccount) {
+            System.out.println("Username: " + acc.getUsername() + ", Email: " + acc.getEmail());
+        }
     }
 }

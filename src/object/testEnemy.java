@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/testEnemy.java
 
 
 <<<<<<< HEAD
@@ -23,15 +24,18 @@ public class testEnemy {
 
         System.out.println("");
 =======
+=======
+package test;
+>>>>>>> c3c0a1817899fe998fa9532f4b9e08f14e1650c2:src/test/testEnemy.java
 import java.util.Scanner;
 import object.Enemy;
 import object.EnemyList;
 
 public class testEnemy {
     public void testEditDelete() {
-        Enemy e1 = new Enemy(201, "Goblin");
-        Enemy e2 = new Enemy(202, "Orc");
-        Enemy e3 = new Enemy(203, "Dragon");
+        Enemy e1 = new Enemy(201, "Goblin", 100);
+        Enemy e2 = new Enemy(202, "Orc", 50);
+        Enemy e3 = new Enemy(203, "Dragon",200);
 
         EnemyList el = new EnemyList();
         el.addEnemy(e1);
@@ -53,6 +57,6 @@ public class testEnemy {
         el.deleteEnemy(delId);
         System.out.println("After deletion:");
         el.printEnemies();
->>>>>>> ffdd3312dd8d34b5f20f0a348286d1e81d1477da
+
     }
 }

@@ -16,5 +16,17 @@ public class Player extends ObjectGeneral {
         return level;
     }
 
-    
+    public void attack(Enemy enemy, int damage) {
+        System.out.println(this.getName() + " tấn công " + enemy.getName() + " với " + damage + " sát thương.");
+        enemy.takeDamage(damage);
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+               "id=" + getId() +
+               ", name='" + getName() + '\'' +
+               ", level=" + level +
+               '}';
+    }
 }
