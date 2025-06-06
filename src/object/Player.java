@@ -4,6 +4,7 @@ import general.ObjectGeneral;
 
 public class Player extends ObjectGeneral {
     private int level;
+    public int playerId;
 
     public Player(int id, String name, int level) {
         super(id, name);

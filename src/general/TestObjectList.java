@@ -2,11 +2,13 @@ package general;
 import general.ObjectList;
 import object.Account;
 import object.Player;
-import object.Enemy;
 
 public class TestObjectList {
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
-        ObjectList<Account> accountList = new ObjectList<>();
+        final ObjectList<Account> accountList = new ObjectList<>();
         ObjectList<Player> playerList = new ObjectList<>();
         ObjectList<Enemy> enemyList = new ObjectList<>();
 

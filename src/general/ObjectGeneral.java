@@ -2,7 +2,7 @@ package general;
 
 public class ObjectGeneral {
     protected int id;
-    protected String name;
+    public String name;
 
     public ObjectGeneral(int id, String name) {
         this.id = id;

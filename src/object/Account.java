@@ -1,7 +1,7 @@
 package object;
 
 public class Account {
-    private String username;
+    private int username;
     private String email;
 
     public Account(String username, String email) {
@@ -9,7 +9,7 @@ public class Account {
         this.email = email;
     }
 
-    public String getUsername() {
+    public int getUsername() {
         return username;
     }
 
