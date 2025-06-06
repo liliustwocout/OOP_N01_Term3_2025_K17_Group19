@@ -11,10 +11,4 @@ public class Enemy extends ObjectGeneral {
         super(id, name);
     }
 
-    public void displayInfo() {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'displayInfo'");
-    }
-
-    
 }
