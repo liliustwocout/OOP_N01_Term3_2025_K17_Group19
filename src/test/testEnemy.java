@@ -1,7 +1,4 @@
-<<<<<<< HEAD:src/testEnemy.java
 
-
-<<<<<<< HEAD
 import object.Enemy;
 
 public class testEnemy {
@@ -23,10 +20,9 @@ public class testEnemy {
         enemy.displayInfo();
 
         System.out.println("");
-=======
-=======
+
 package test;
->>>>>>> c3c0a1817899fe998fa9532f4b9e08f14e1650c2:src/test/testEnemy.java
+
 import java.util.Scanner;
 import object.Enemy;
 import object.EnemyList;
