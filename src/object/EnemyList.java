@@ -2,6 +2,8 @@ package object;
 
 import java.util.ArrayList;
 
+import Enemy;
+
 public class EnemyList {
     ArrayList<Enemy> list = new ArrayList<>();
 
