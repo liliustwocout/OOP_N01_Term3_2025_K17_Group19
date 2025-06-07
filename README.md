@@ -125,6 +125,7 @@ Hoài Anh	Thực hiện kiểm thử chức năng trong file TestObjectList
 
 
 
+![494869075_539016669148616_841506361584777237_n](https://github.com/user-attachments/assets/ff4dd3ae-f10c-45bf-a2aa-399447a431af)
 
 
 
