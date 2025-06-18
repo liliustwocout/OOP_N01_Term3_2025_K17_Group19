@@ -7,7 +7,7 @@ import object.EnemyList;
 import object.Player;
 
 public class testEnemy {
-    public void testEditDelete() {
+    public  void testEditDelete() {
         Enemy e1 = new Enemy(201, "Goblin", 100);
         Enemy e2 = new Enemy(202, "Orc", 50);
         Enemy e3 = new Enemy(203, "Dragon",200);
