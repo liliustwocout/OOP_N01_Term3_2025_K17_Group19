@@ -88,9 +88,13 @@ Xuất dữ liệu sang JSON hoặc file CSV
 Lưu checkpoint (bản đồ + nhiệm vụ + trạng thái nhân vật)
 
 **Phân tích chức năng chính thành các chức năng nhỏ**
+
 Đạt	Viết class Player và thêm thuộc tính level, viết phương thức showHighLevelPlayers(int level)
+
 Duy	Tạo danh sách các Player và thêm dữ liệu demo
+
 Hoài Anh	Thực hiện kiểm thử chức năng trong file TestObjectList
+
 
 **Lưu đồ thuật toán (Flowchart)**
 +-------------------------------+
@@ -125,6 +129,7 @@ Hoài Anh	Thực hiện kiểm thử chức năng trong file TestObjectList
 
 
 
+![494869075_539016669148616_841506361584777237_n](https://github.com/user-attachments/assets/ff4dd3ae-f10c-45bf-a2aa-399447a431af)
 
 
 
