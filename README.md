@@ -38,7 +38,6 @@ Thiết kế và phát triển Game 2D:Hệ thống game "Lạc Trong Rừng C�
  + Tên nhân vật (name).
  + Cấp độ (level).
  + Avatar (hình ảnh nhân vật).
- + Tài khoản sở hữu (account_id).
    
 2.2 Phương thức hoạt động liên quan đến đối tượng nhân vật:
 
@@ -470,9 +469,9 @@ Chúng em viết 15+ class cho 4 đối tượng xác định được ở câu 
 
 | Thành viên |              Nhiệm vụ              |
 |------------|------------------------------------|
-|   Đạt      | Quản lý tài khoản và đăng nhập     | 
+|   Đạt      | Quản lý tài khoản và game logic    | 
 |   Hoài Anh | Quản lý nhân vật và chọn nhân vật  |
-|   Duy      | Quản lý quái vật và game logic     |
+|   Duy      | Quản lý quái vật và đăng nhập      |
 
 
                                                            
