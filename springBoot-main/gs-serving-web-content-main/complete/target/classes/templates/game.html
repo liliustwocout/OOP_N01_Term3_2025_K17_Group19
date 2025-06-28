@@ -3,70 +3,740 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trò Chơi 2D</title>
+    <title>Lạc Trong Rừng Cấm - 2D Game</title>
     <style>
         body {
-            background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
             font-family: 'Segoe UI', Arial, sans-serif;
+            overflow: hidden;
         }
-        .game-container {
-            background: #fff;
-            padding: 36px 32px 28px 32px;
-            border-radius: 18px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
-        }
-        h2 {
-            color: #f5576c;
-            margin-bottom: 22px;
-            letter-spacing: 1px;
-        }
-        .btn-group {
+        
+        .game-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 15px 25px;
+            margin-bottom: 20px;
             display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-top: 18px;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        button {
-            background: linear-gradient(90deg, #f5576c 0%, #f093fb 100%);
-            color: #fff;
+        
+        .game-title {
+            color: #2d3436;
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        
+        .game-info {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .info-item {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        
+        .logout-btn {
+            background: #d63031;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background: #b71540;
+        }
+        
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        #gameCanvas {
+            border: 3px solid #2d3436;
+            border-radius: 10px;
+            background: linear-gradient(180deg, #87CEEB 0%, #98FB98 50%, #8FBC8F 100%);
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .control-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
             border: none;
             border-radius: 8px;
-            padding: 13px 0;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(245,87,108,0.08);
-            transition: background 0.2s, transform 0.2s;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
         }
-        button:hover {
-            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
-            transform: translateY(-2px) scale(1.03);
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
+            color: white;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #55a3ff 0%, #0984e3 100%);
+            color: white;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .game-status {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .key-hint {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #2d3436;
         }
     </style>
 </head>
 <body>
-    <div style="position: absolute; top: 24px; right: 32px; z-index: 10;">
-        <a href="/login" style="background: #eb0404; color: #fff; padding: 7px 18px; border-radius: 8px; text-decoration: none; font-weight: 500; transition: background 0.2s;">Đăng xuất</a>
-    </div>
-    <div class="game-container">
-        <h2>Chào mừng <span th:text="${username}"></span> đến với Lạc Trong Rừng Cấm</h2>
-        <div class="btn-group">
-            <input type="hidden" id="username-hidden" th:value="${username}" />
-            <button onclick="chooseCharacter()">Play Game</button>
+    <div class="game-header">
+        <h1 class="game-title">🌲 Lạc Trong Rừng Cấm - 2D Adventure 🌲</h1>
+        <div class="game-info">
+            <div class="info-item">Nhân vật: <span th:text="${playerName}"></span></div>
+            <div class="info-item">Máu: <span id="player-hp" th:text="${playerMaxHp}"></span>/<span th:text="${playerMaxHp}"></span></div>
+            <div class="info-item">Rương: <span id="chests-collected">0</span>/3</div>
+            <div class="info-item">Điểm: <span id="score">0</span></div>
+            <a href="/choose-character?username=[[${username}]]" class="logout-btn" style="background: #f39c12;">🔄 Đổi Nhân Vật</a>
+            <a href="/login" class="logout-btn">Đăng xuất</a>
         </div>
     </div>
-    <script>
-        function chooseCharacter() {
-            var username = document.getElementById('username-hidden').value;
-            window.location.href = '/choose-character?username=' + encodeURIComponent(username);
+    
+    <div class="game-container">
+        <canvas id="gameCanvas" width="1200" height="700"></canvas>
+        
+        <div class="controls">
+            <div class="control-group">
+                <button class="btn btn-primary" onclick="attack()" id="attack-btn">⚔️ Tấn Công</button>
+                <button class="btn btn-success" onclick="heal()" id="heal-btn">💚 Hồi Máu</button>
+                <button class="btn btn-danger" onclick="resetGame()">🔄 Bắt Đầu Lại</button>
+            </div>
+        </div>
+        
+        <div class="key-hint">
+            <strong>Điều khiển:</strong> WASD hoặc Arrow Keys để di chuyển | Space để tấn công | H để hồi máu
+        </div>
+        
+        <div class="game-status" id="game-status">
+            Chào mừng <span th:text="${playerName}"></span> đến với Lạc Trong Rừng Cấm! Di chuyển để nhặt rương và đánh quái vật.
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Lấy thông tin nhân vật từ server
+        const playerData = {
+            id: /*[[${playerId}]]*/ 1,
+            name: /*[[${playerName}]]*/ "Player",
+            level: /*[[${playerLevel}]]*/ 1,
+            attack: /*[[${playerAttack}]]*/ 10,
+            defense: /*[[${playerDefense}]]*/ 5,
+            maxHp: /*[[${playerMaxHp}]]*/ 100,
+            avatar: /*[[${playerAvatar}]]*/ "knight.png"
+        };
+        
+        // Debug: Log player data
+        console.log("Player Data:", playerData);
+        
+        // Đảm bảo giá trị mặc định nếu có lỗi
+        if (!playerData.maxHp || playerData.maxHp <= 0) {
+            playerData.maxHp = 100;
         }
+        if (!playerData.attack || playerData.attack <= 0) {
+            playerData.attack = 10;
+        }
+        if (!playerData.defense || playerData.defense < 0) {
+            playerData.defense = 5;
+        }
+        
+        // Game state
+        let gameState = {
+            player: {
+                x: 50,  // Di chuyển xa hơn từ enemy đầu tiên
+                y: 300, // Di chuyển xa hơn từ enemy đầu tiên
+                width: 35,
+                height: 45,
+                speed: 1.5,
+                hp: playerData.maxHp,
+                maxHp: playerData.maxHp,
+                attack: playerData.attack,
+                defense: playerData.defense,
+                isAttacking: false,
+                attackCooldown: 0
+            },
+            enemies: [
+                { 
+                    x: 400, y: 400, width: 30, height: 40, speed: 1, hp: 50, maxHp: 50, 
+                    attack: 10, defense: 3, isChasing: false, isAlive: true,
+                    attackCooldown: 0, lastAttackTime: 0
+                },
+                { 
+                    x: 700, y: 300, width: 30, height: 40, speed: 1, hp: 50, maxHp: 50, 
+                    attack: 10, defense: 3, isChasing: false, isAlive: true,
+                    attackCooldown: 0, lastAttackTime: 0
+                },
+                { 
+                    x: 1000, y: 500, width: 30, height: 40, speed: 1, hp: 50, maxHp: 50, 
+                    attack: 10, defense: 3, isChasing: false, isAlive: true,
+                    attackCooldown: 0, lastAttackTime: 0
+                }
+            ],
+            chests: [
+                { x: 250, y: 150, width: 30, height: 30, collected: false },
+                { x: 700, y: 200, width: 30, height: 30, collected: false },
+                { x: 1000, y: 600, width: 30, height: 30, collected: false }
+            ],
+            keys: {
+                w: false, s: false, a: false, d: false,
+                up: false, down: false, left: false, right: false
+            },
+            score: 0,
+            gameWon: false,
+            gameOver: false,
+            gameTime: 0
+        };
+        
+        // Debug: Log initial game state
+        console.log("Initial Game State:", gameState);
+        
+        // Colors
+        const colors = {
+            player: '#3498db',
+            enemy: '#e74c3c',
+            chest: '#f39c12',
+            ground: '#8B4513',
+            tree: '#228B22',
+            grass: '#90EE90'
+        };
+        
+        // Game loop
+        function gameLoop() {
+            update();
+            render();
+            requestAnimationFrame(gameLoop);
+        }
+        
+        // Update game state
+        function update() {
+            if (gameState.gameOver || gameState.gameWon) return;
+            
+            gameState.gameTime++;
+            updatePlayer();
+            updateEnemies();
+            checkCollisions();
+            updateUI();
+        }
+        
+        // Update player
+        function updatePlayer() {
+            // Movement
+            let dx = 0, dy = 0;
+            
+            if (gameState.keys.w || gameState.keys.up) dy -= gameState.player.speed;
+            if (gameState.keys.s || gameState.keys.down) dy += gameState.player.speed;
+            if (gameState.keys.a || gameState.keys.left) dx -= gameState.player.speed;
+            if (gameState.keys.d || gameState.keys.right) dx += gameState.player.speed;
+            
+            // Normalize diagonal movement
+            if (dx !== 0 && dy !== 0) {
+                dx *= 0.707;
+                dy *= 0.707;
+            }
+            
+            // Update position with bounds checking
+            gameState.player.x = Math.max(0, Math.min(canvas.width - gameState.player.width, gameState.player.x + dx));
+            gameState.player.y = Math.max(0, Math.min(canvas.height - gameState.player.height, gameState.player.y + dy));
+            
+            // Update attack cooldown
+            if (gameState.player.attackCooldown > 0) {
+                gameState.player.attackCooldown--;
+            }
+        }
+        
+        // Update enemies
+        function updateEnemies() {
+            gameState.enemies.forEach(enemy => {
+                if (!enemy.isAlive) return;
+                
+                // Update enemy attack cooldown
+                if (enemy.attackCooldown > 0) {
+                    enemy.attackCooldown--;
+                }
+                
+                // Check if player is nearby (chase range)
+                const distance = Math.sqrt(
+                    Math.pow(enemy.x - gameState.player.x, 2) + 
+                    Math.pow(enemy.y - gameState.player.y, 2)
+                );
+                
+                if (distance < 200) {
+                    enemy.isChasing = true;
+                    
+                    // Move towards player
+                    const dx = gameState.player.x - enemy.x;
+                    const dy = gameState.player.y - enemy.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist > 0) {
+                        enemy.x += (dx / dist) * enemy.speed;
+                        enemy.y += (dy / dist) * enemy.speed;
+                    }
+                } else {
+                    enemy.isChasing = false;
+                    
+                    // Random movement when not chasing
+                    if (Math.random() < 0.01) {
+                        enemy.x += (Math.random() - 0.5) * 3;
+                        enemy.y += (Math.random() - 0.5) * 3;
+                    }
+                }
+                
+                // Keep enemy in bounds
+                enemy.x = Math.max(0, Math.min(canvas.width - enemy.width, enemy.x));
+                enemy.y = Math.max(0, Math.min(canvas.height - enemy.height, enemy.y));
+            });
+        }
+        
+        // Check collisions
+        function checkCollisions() {
+            // Player vs Chests
+            gameState.chests.forEach(chest => {
+                if (!chest.collected && isColliding(gameState.player, chest)) {
+                    chest.collected = true;
+                    gameState.score += 100;
+                    updateStatus(`🎁 Nhặt được rương! +100 điểm`);
+                }
+            });
+            
+            // Player vs Enemies
+            gameState.enemies.forEach(enemy => {
+                if (enemy.isAlive && isColliding(gameState.player, enemy)) {
+                    // Debug: Log collision
+                    console.log("Player collided with enemy!", {
+                        player: { x: gameState.player.x, y: gameState.player.y, hp: gameState.player.hp },
+                        enemy: { x: enemy.x, y: enemy.y, attackCooldown: enemy.attackCooldown }
+                    });
+                    
+                    // Enemy attacks player with cooldown (60 frames = 1 second)
+                    if (enemy.attackCooldown <= 0) {
+                        const damage = Math.max(1, enemy.attack - gameState.player.defense);
+                        gameState.player.hp -= damage;
+                        enemy.attackCooldown = 60;
+                        updateStatus(`👹 Quái vật tấn công! -${damage} máu`);
+                        
+                        // Debug: Log damage
+                        console.log("Enemy attacked player!", { damage, newHp: gameState.player.hp });
+                        
+                        // Push player away
+                        const dx = gameState.player.x - enemy.x;
+                        const dy = gameState.player.y - enemy.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist > 0) {
+                            gameState.player.x += (dx / dist) * 25;
+                            gameState.player.y += (dy / dist) * 25;
+                        }
+                    }
+                }
+            });
+            
+            // Check win condition
+            const allChestsCollected = gameState.chests.every(chest => chest.collected);
+            if (allChestsCollected && !gameState.gameWon) {
+                gameState.gameWon = true;
+                updateStatus(`🎉 CHIẾN THẮNG! Bạn đã nhặt hết rương! Điểm: ${gameState.score}`);
+            }
+            
+            // Check lose condition
+            if (gameState.player.hp <= 0) {
+                gameState.player.hp = 0;
+                gameState.gameOver = true;
+                console.log("GAME OVER triggered! Player HP:", gameState.player.hp);
+                updateStatus(`💀 GAME OVER! Bạn đã thua! Điểm: ${gameState.score}`);
+            }
+        }
+        
+        // Collision detection
+        function isColliding(rect1, rect2) {
+            return rect1.x < rect2.x + rect2.width &&
+                   rect1.x + rect1.width > rect2.x &&
+                   rect1.y < rect2.y + rect2.height &&
+                   rect1.y + rect1.height > rect2.y;
+        }
+        
+        // Render game
+        function render() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw background elements
+            drawBackground();
+            
+            // Draw chests
+            gameState.chests.forEach(chest => {
+                if (!chest.collected) {
+                    drawChest(chest);
+                }
+            });
+            
+            // Draw enemies
+            gameState.enemies.forEach(enemy => {
+                if (enemy.isAlive) {
+                    drawEnemy(enemy);
+                }
+            });
+            
+            // Draw player
+            drawPlayer();
+            
+            // Draw UI elements
+            drawUI();
+        }
+        
+        // Draw background
+        function drawBackground() {
+            // Draw ground
+            ctx.fillStyle = colors.ground;
+            ctx.fillRect(0, canvas.height - 60, canvas.width, 60);
+            
+            // Draw more trees for larger canvas
+            ctx.fillStyle = colors.tree;
+            ctx.fillRect(100, canvas.height - 140, 25, 80);
+            ctx.fillRect(400, canvas.height - 120, 25, 60);
+            ctx.fillRect(700, canvas.height - 150, 25, 90);
+            ctx.fillRect(1000, canvas.height - 130, 25, 70);
+            ctx.fillRect(200, canvas.height - 110, 20, 50);
+            ctx.fillRect(500, canvas.height - 140, 20, 80);
+            ctx.fillRect(800, canvas.height - 120, 20, 60);
+            ctx.fillRect(1100, canvas.height - 160, 20, 100);
+            
+            // Draw grass patches
+            ctx.fillStyle = colors.grass;
+            ctx.fillRect(0, canvas.height - 70, canvas.width, 10);
+            
+            // Draw some decorative elements
+            ctx.fillStyle = '#8B4513';
+            ctx.fillRect(150, canvas.height - 80, 15, 20);
+            ctx.fillRect(600, canvas.height - 85, 15, 25);
+            ctx.fillRect(950, canvas.height - 75, 15, 15);
+        }
+        
+        // Draw player
+        function drawPlayer() {
+            ctx.fillStyle = colors.player;
+            ctx.fillRect(gameState.player.x, gameState.player.y, gameState.player.width, gameState.player.height);
+            
+            // Draw player details
+            ctx.fillStyle = '#2980b9';
+            ctx.fillRect(gameState.player.x + 8, gameState.player.y + 8, 19, 6);
+            ctx.fillRect(gameState.player.x + 12, gameState.player.y + 20, 11, 20);
+            
+            // Draw attack effect
+            if (gameState.player.isAttacking) {
+                ctx.fillStyle = '#e74c3c';
+                ctx.fillRect(gameState.player.x + gameState.player.width, gameState.player.y + 12, 25, 21);
+            }
+        }
+        
+        // Draw enemy
+        function drawEnemy(enemy) {
+            ctx.fillStyle = enemy.isChasing ? '#c0392b' : colors.enemy;
+            ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+            
+            // Draw enemy details
+            ctx.fillStyle = '#7f8c8d';
+            ctx.fillRect(enemy.x + 6, enemy.y + 6, 18, 6);
+            ctx.fillRect(enemy.x + 10, enemy.y + 18, 10, 17);
+            
+            // Draw health bar
+            const healthPercent = enemy.hp / enemy.maxHp;
+            ctx.fillStyle = '#2c3e50';
+            ctx.fillRect(enemy.x, enemy.y - 12, enemy.width, 6);
+            ctx.fillStyle = healthPercent > 0.5 ? '#27ae60' : healthPercent > 0.25 ? '#f39c12' : '#e74c3c';
+            ctx.fillRect(enemy.x, enemy.y - 12, enemy.width * healthPercent, 6);
+            
+            // Draw attack cooldown indicator
+            if (enemy.attackCooldown > 0) {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+                ctx.fillRect(enemy.x, enemy.y - 18, enemy.width, 4);
+                ctx.fillStyle = '#e74c3c';
+                ctx.fillRect(enemy.x, enemy.y - 18, enemy.width * (enemy.attackCooldown / 60), 4);
+            }
+        }
+        
+        // Draw chest
+        function drawChest(chest) {
+            ctx.fillStyle = colors.chest;
+            ctx.fillRect(chest.x, chest.y, chest.width, chest.height);
+            
+            // Draw chest details
+            ctx.fillStyle = '#d68910';
+            ctx.fillRect(chest.x + 3, chest.y + 3, chest.width - 6, 4);
+            ctx.fillRect(chest.x + 3, chest.y + 10, chest.width - 6, 4);
+            ctx.fillRect(chest.x + 3, chest.y + 17, chest.width - 6, 4);
+            
+            // Add sparkle effect
+            ctx.fillStyle = '#f1c40f';
+            ctx.fillRect(chest.x + 5, chest.y + 5, 3, 3);
+            ctx.fillRect(chest.x + chest.width - 8, chest.y + 5, 3, 3);
+        }
+        
+        // Draw UI
+        function drawUI() {
+            // Draw player health bar
+            const healthPercent = gameState.player.hp / gameState.player.maxHp;
+            ctx.fillStyle = '#2c3e50';
+            ctx.fillRect(15, 15, 250, 18);
+            ctx.fillStyle = healthPercent > 0.5 ? '#27ae60' : healthPercent > 0.25 ? '#f39c12' : '#e74c3c';
+            ctx.fillRect(15, 15, 250 * healthPercent, 18);
+            
+            // Draw health text
+            ctx.fillStyle = '#2c3e50';
+            ctx.font = '14px Arial';
+            ctx.fillText(`HP: ${gameState.player.hp}/${gameState.player.maxHp}`, 20, 28);
+            
+            // Draw score
+            ctx.fillStyle = '#2c3e50';
+            ctx.font = '18px Arial';
+            ctx.fillText(`Điểm: ${gameState.score}`, canvas.width - 150, 30);
+            
+            // Draw game over/win screen
+            if (gameState.gameOver || gameState.gameWon) {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = gameState.gameWon ? '#27ae60' : '#e74c3c';
+                ctx.font = '60px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(gameState.gameWon ? 'CHIẾN THẮNG!' : 'GAME OVER!', canvas.width / 2, canvas.height / 2 - 60);
+                
+                ctx.fillStyle = 'white';
+                ctx.font = '28px Arial';
+                ctx.fillText(`Điểm: ${gameState.score}`, canvas.width / 2, canvas.height / 2);
+                ctx.fillText('Nhấn "Bắt Đầu Lại" để chơi tiếp', canvas.width / 2, canvas.height / 2 + 60);
+                ctx.textAlign = 'left';
+            }
+        }
+        
+        // Attack function
+        function attack() {
+            if (gameState.player.attackCooldown > 0 || gameState.gameOver || gameState.gameWon) return;
+            
+            gameState.player.isAttacking = true;
+            gameState.player.attackCooldown = 25;
+            
+            // Check for enemies in attack range
+            gameState.enemies.forEach(enemy => {
+                if (!enemy.isAlive) return;
+                
+                const distance = Math.sqrt(
+                    Math.pow(enemy.x - gameState.player.x, 2) + 
+                    Math.pow(enemy.y - gameState.player.y, 2)
+                );
+                
+                if (distance < 60) {
+                    const damage = Math.max(1, gameState.player.attack - enemy.defense);
+                    enemy.hp -= damage;
+                    gameState.score += 10;
+                    updateStatus(`⚔️ Tấn công quái vật! -${damage} máu, +10 điểm`);
+                    
+                    if (enemy.hp <= 0) {
+                        enemy.hp = 0;
+                        enemy.isAlive = false;
+                        gameState.score += 50;
+                        updateStatus(`💀 Quái vật bị đánh bại! +50 điểm`);
+                    }
+                }
+            });
+            
+            setTimeout(() => {
+                gameState.player.isAttacking = false;
+            }, 250);
+        }
+        
+        // Heal function
+        function heal() {
+            if (gameState.player.hp >= gameState.player.maxHp || gameState.gameOver || gameState.gameWon) return;
+            
+            const healAmount = 30;
+            gameState.player.hp = Math.min(gameState.player.maxHp, gameState.player.hp + healAmount);
+            updateStatus(`💚 Hồi máu! +${healAmount} HP`);
+        }
+        
+        // Reset game
+        function resetGame() {
+            gameState = {
+                player: {
+                    x: 50,  // Di chuyển xa hơn từ enemy đầu tiên
+                    y: 300, // Di chuyển xa hơn từ enemy đầu tiên
+                    width: 35,
+                    height: 45,
+                    speed: 2.5,
+                    hp: playerData.maxHp,
+                    maxHp: playerData.maxHp,
+                    attack: playerData.attack,
+                    defense: playerData.defense,
+                    isAttacking: false,
+                    attackCooldown: 0
+                },
+                enemies: [
+                    { 
+                        x: 400, y: 400, width: 30, height: 40, speed: 1.5, hp: 50, maxHp: 50, 
+                        attack: 10, defense: 3, isChasing: false, isAlive: true,
+                        attackCooldown: 0, lastAttackTime: 0
+                    },
+                    { 
+                        x: 700, y: 300, width: 30, height: 40, speed: 1.5, hp: 50, maxHp: 50, 
+                        attack: 10, defense: 3, isChasing: false, isAlive: true,
+                        attackCooldown: 0, lastAttackTime: 0
+                    },
+                    { 
+                        x: 1000, y: 500, width: 30, height: 40, speed: 1.5, hp: 50, maxHp: 50, 
+                        attack: 10, defense: 3, isChasing: false, isAlive: true,
+                        attackCooldown: 0, lastAttackTime: 0
+                    }
+                ],
+                chests: [
+                    { x: 250, y: 150, width: 30, height: 30, collected: false },
+                    { x: 700, y: 200, width: 30, height: 30, collected: false },
+                    { x: 1000, y: 600, width: 30, height: 30, collected: false }
+                ],
+                keys: gameState.keys,
+                score: 0,
+                gameWon: false,
+                gameOver: false,
+                gameTime: 0
+            };
+            
+            updateStatus('🔄 Game đã được reset!');
+        }
+        
+        // Update UI
+        function updateUI() {
+            document.getElementById('player-hp').textContent = gameState.player.hp;
+            document.getElementById('chests-collected').textContent = gameState.chests.filter(c => c.collected).length;
+            document.getElementById('score').textContent = gameState.score;
+        }
+        
+        // Update status
+        function updateStatus(message) {
+            document.getElementById('game-status').textContent = message;
+        }
+        
+        // Keyboard event listeners
+        document.addEventListener('keydown', (e) => {
+            switch(e.key.toLowerCase()) {
+                case 'w':
+                case 'arrowup':
+                    gameState.keys.w = true;
+                    gameState.keys.up = true;
+                    break;
+                case 's':
+                case 'arrowdown':
+                    gameState.keys.s = true;
+                    gameState.keys.down = true;
+                    break;
+                case 'a':
+                case 'arrowleft':
+                    gameState.keys.a = true;
+                    gameState.keys.left = true;
+                    break;
+                case 'd':
+                case 'arrowright':
+                    gameState.keys.d = true;
+                    gameState.keys.right = true;
+                    break;
+                case ' ':
+                    e.preventDefault();
+                    attack();
+                    break;
+                case 'h':
+                    heal();
+                    break;
+            }
+        });
+        
+        document.addEventListener('keyup', (e) => {
+            switch(e.key.toLowerCase()) {
+                case 'w':
+                case 'arrowup':
+                    gameState.keys.w = false;
+                    gameState.keys.up = false;
+                    break;
+                case 's':
+                case 'arrowdown':
+                    gameState.keys.s = false;
+                    gameState.keys.down = false;
+                    break;
+                case 'a':
+                case 'arrowleft':
+                    gameState.keys.a = false;
+                    gameState.keys.left = false;
+                    break;
+                case 'd':
+                case 'arrowright':
+                    gameState.keys.d = false;
+                    gameState.keys.right = false;
+                    break;
+            }
+        });
+        
+        // Start the game
+        gameLoop();
     </script>
 </body>
 </html>

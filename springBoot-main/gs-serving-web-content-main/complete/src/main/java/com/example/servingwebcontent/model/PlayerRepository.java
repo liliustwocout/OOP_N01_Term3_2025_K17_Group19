@@ -13,4 +13,8 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
     // Lấy nhân vật cấp cao (level >= 50)
     @Query("SELECT p FROM Player p WHERE p.level >= :minLevel ORDER BY p.level DESC")
     List<Player> findHighLevelPlayers(@Param("minLevel") int minLevel);
+    
+    // Tìm kiếm nhân vật theo tên
+    @Query("SELECT p FROM Player p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :searchTerm, '%'))")
+    List<Player> findByNameContainingIgnoreCase(@Param("searchTerm") String searchTerm);
 } 

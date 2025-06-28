@@ -6,7 +6,7 @@
     <title>Quản Lý Nhân Vật</title>
     <style>
         body { background: linear-gradient(120deg, #f6d365 0%, #fda085 100%); min-height: 100vh; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; }
-        .container { background: #fff; margin: 40px auto; padding: 32px 28px 24px 28px; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.12); max-width: 500px; }
+        .container { background: #fff; margin: 40px auto; padding: 32px 28px 24px 28px; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.12); max-width: 600px; }
         h2 { color: #f76b1c; margin-bottom: 18px; text-align: center; }
         table { width: 100%; border-collapse: collapse; margin-bottom: 18px; }
         th, td { padding: 10px; border-bottom: 1px solid #eee; text-align: left; }
@@ -39,6 +39,18 @@
             pointer-events: none;
             opacity: 0.7;
         }
+        .attack-value {
+            color: #ff4d4f;
+            font-weight: bold;
+        }
+        .hp-value {
+            color: #ff4d4f;
+            font-weight: bold;
+        }
+        .defense-value {
+            color: #ff4d4f;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -53,15 +65,30 @@
             <a class="btn btn-add switch-btn" href="/admin/enemies">Quái vật</a>
         </div>
         <h2>Quản Lý Nhân Vật</h2>
+        
+        <!-- Form tìm kiếm -->
+        <div style="margin-bottom: 16px; display: flex; gap: 8px; align-items: center;">
+            <form action="/admin/players" method="get" style="display: flex; gap: 8px; align-items: center; flex: 1;">
+                <input type="text" name="search" th:value="${searchTerm}" placeholder="Tìm kiếm nhân vật..." 
+                       style="flex: 1; padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
+                <button type="submit" class="btn btn-add" style="margin: 0; padding: 8px 16px;">🔍 Tìm</button>
+                <a th:if="${searchTerm != null and !searchTerm.isEmpty()}" href="/admin/players" 
+                   class="btn" style="background: #ff4d4f; color: #fff; margin: 0; padding: 8px 16px;">❌ Xóa</a>
+            </form>
+        </div>
+        
         <a class="btn btn-add" href="/admin/players/add">+ Thêm nhân vật</a>
         <table>
             <thead>
-                <tr><th>Tên nhân vật</th><th>Level</th><th>Hành động</th></tr>
+                <tr><th>Tên nhân vật</th><th>Level</th><th>Sát thương</th><th>Máu</th><th>Phòng thủ</th><th>Hành động</th></tr>
             </thead>
             <tbody>
                 <tr th:each="player : ${players}">
                     <td th:text="${player.name}"></td>
                     <td th:text="${player.level}"></td>
+                    <td class="attack-value" th:text="${player.attack} + ' DMG'"></td>
+                    <td class="hp-value" th:text="${player.maxHp} + ' HP'"></td>
+                    <td class="defense-value" th:text="${player.defense} + ' DEF'"></td>
                     <td class="actions">
                         <a class="btn btn-edit" th:href="@{'/admin/players/edit'(id=${player.id})}">Sửa</a>
                         <a class="btn btn-attack" th:href="@{'/attack'(playerId=${player.id})}">⚔️ Tấn Công</a>

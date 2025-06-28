@@ -116,6 +116,18 @@
         <div th:if="${error}" style="color: #ff4d4f; background: #fff1f0; border-radius: 8px; padding: 10px 0; margin-bottom: 14px; font-weight: 500; text-align: center;">
             <span th:text="${error}"></span>
         </div>
+        
+        <!-- Form tìm kiếm -->
+        <div style="margin-bottom: 16px; display: flex; gap: 8px; align-items: center;">
+            <form action="/admin/accounts" method="get" style="display: flex; gap: 8px; align-items: center; flex: 1;">
+                <input type="text" name="search" th:value="${searchTerm}" placeholder="Tìm kiếm tài khoản..." 
+                       style="flex: 1; padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
+                <button type="submit" class="btn btn-add" style="margin: 0; padding: 8px 16px;">🔍 Tìm</button>
+                <a th:if="${searchTerm != null and !searchTerm.isEmpty()}" href="/admin/accounts" 
+                   class="btn" style="background: #ff4d4f; color: #fff; margin: 0; padding: 8px 16px;">❌ Xóa</a>
+            </form>
+        </div>
+        
         <a class="btn btn-add" href="/admin/accounts/add">+ Thêm tài khoản</a>
         <table>
             <thead>

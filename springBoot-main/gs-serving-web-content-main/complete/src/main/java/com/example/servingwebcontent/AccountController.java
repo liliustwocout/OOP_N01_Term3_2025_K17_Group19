@@ -2,18 +2,24 @@ package com.example.servingwebcontent;
 
 import com.example.servingwebcontent.model.Account;
 import com.example.servingwebcontent.model.AccountRepository;
+import com.example.servingwebcontent.model.Player;
+import com.example.servingwebcontent.model.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
+import java.util.List;
 
 @Controller
 public class AccountController {
 
     @Autowired
     private AccountRepository accountRepository;
+    
+    @Autowired
+    private PlayerRepository playerRepository;
 
     // Trang chủ (index)
     @GetMapping("/")
@@ -42,8 +48,12 @@ public class AccountController {
         }
         Account acc = accountRepository.findByUsername(username);
         if (acc != null && acc.getPassword().equals(password)) {
+            // Chuyển đến trang chọn nhân vật thay vì vào game trực tiếp
+            // Hiển thị tất cả player có sẵn để tài khoản có thể chọn
+            List<Player> players = playerRepository.findAll();
             model.addAttribute("username", username);
-            return "game";
+            model.addAttribute("players", players);
+            return "choose-character";
         }
         model.addAttribute("error", "Sai tên đăng nhập hoặc mật khẩu");
         return "login";
@@ -66,8 +76,15 @@ public class AccountController {
 
     // Trang quản lý tài khoản (chỉ cho admin)
     @GetMapping("/admin/accounts")
-    public String listAccounts(Model model) {
-        model.addAttribute("accounts", accountRepository.findAll());
+    public String listAccounts(@RequestParam(value = "search", required = false) String search, Model model) {
+        List<Account> accounts;
+        if (search != null && !search.trim().isEmpty()) {
+            accounts = accountRepository.findByUsernameContainingIgnoreCase(search.trim());
+        } else {
+            accounts = accountRepository.findAll();
+        }
+        model.addAttribute("accounts", accounts);
+        model.addAttribute("searchTerm", search != null ? search : "");
         return "accounts";
     }
 
@@ -91,6 +108,7 @@ public class AccountController {
 
         // Sau khi thêm xong, load lại danh sách
         model.addAttribute("accounts", accountRepository.findAll());
+        model.addAttribute("searchTerm", "");
         return "accounts";
     }
 
@@ -117,6 +135,7 @@ public class AccountController {
             accountRepository.save(acc);
         }
         model.addAttribute("accounts", accountRepository.findAll());
+        model.addAttribute("searchTerm", "");
         return "accounts";
     }
 
@@ -131,6 +150,7 @@ public class AccountController {
             model.addAttribute("error", "Không tìm thấy tài khoản để xoá!");
         }
         model.addAttribute("accounts", accountRepository.findAll());
+        model.addAttribute("searchTerm", "");
         return "accounts";
     }
 }
