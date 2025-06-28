@@ -1,4 +1,4 @@
-package object;
+package com.example.servingwebcontent.object;
 
 import java.util.ArrayList;
 

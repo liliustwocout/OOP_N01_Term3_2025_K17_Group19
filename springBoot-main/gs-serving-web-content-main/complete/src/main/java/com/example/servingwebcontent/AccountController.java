@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AccountController {
+
     @Autowired
     private AccountRepository accountRepository;
 
     // Trang chủ (index)
     @GetMapping("/")
     public String homePage() {
-        return "redirect:/index.html";
+        return "index";
     }
 
     // Trang đăng nhập
@@ -37,7 +37,8 @@ public class AccountController {
     @PostMapping("/login")
     public String login(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
         if (username.equals("admin") && password.equals("admin123")) {
-            return "redirect:/admin/accounts";
+            model.addAttribute("accounts", accountRepository.findAll());
+            return "accounts";
         }
         Account acc = accountRepository.findByUsername(username);
         if (acc != null && acc.getPassword().equals(password)) {
@@ -76,7 +77,7 @@ public class AccountController {
         return "add-account";
     }
 
-    // Xử lý thêm tài khoản mới (admin)
+    // Xử lý thêm tài khoản mới (admin) - Không dùng redirect
     @PostMapping("/admin/accounts/add")
     public String addAccount(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
         if (accountRepository.findByUsername(username) != null) {
@@ -87,7 +88,10 @@ public class AccountController {
         acc.setUsername(username);
         acc.setPassword(password);
         accountRepository.save(acc);
-        return "redirect:/admin/accounts";
+
+        // Sau khi thêm xong, load lại danh sách
+        model.addAttribute("accounts", accountRepository.findAll());
+        return "accounts";
     }
 
     // Trang sửa tài khoản (admin)
@@ -100,33 +104,33 @@ public class AccountController {
         return "edit-account";
     }
 
-    // Xử lý cập nhật tài khoản (admin)
+    // Xử lý cập nhật tài khoản (admin) - Không dùng redirect
     @PostMapping("/admin/accounts/edit")
-    public String editAccount(@RequestParam("old-username") String oldUsername, @RequestParam("username") String username, @RequestParam("password") String password, Model model) {
+    public String editAccount(@RequestParam("old-username") String oldUsername,
+                              @RequestParam("username") String username,
+                              @RequestParam("password") String password,
+                              Model model) {
         Account acc = accountRepository.findByUsername(oldUsername);
         if (acc != null) {
             acc.setUsername(username);
             acc.setPassword(password);
             accountRepository.save(acc);
         }
-        return "redirect:/admin/accounts";
+        model.addAttribute("accounts", accountRepository.findAll());
+        return "accounts";
     }
 
-    // Xử lý xóa tài khoản (admin)
+    // Xử lý xóa tài khoản (admin) - Không dùng redirect
     @PostMapping("/admin/accounts/delete")
-    public String deleteAccount(@RequestParam("username") String username, RedirectAttributes redirectAttributes) {
-        try {
-            Account acc = accountRepository.findByUsername(username);
-            if (acc != null) {
-                accountRepository.delete(acc);
-                redirectAttributes.addFlashAttribute("success", "Xoá tài khoản thành công!");
-            } else {
-                redirectAttributes.addFlashAttribute("error", "Không tìm thấy tài khoản để xoá!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            redirectAttributes.addFlashAttribute("error", "Xoá tài khoản thất bại!");
+    public String deleteAccount(@RequestParam("username") String username, Model model) {
+        Account acc = accountRepository.findByUsername(username);
+        if (acc != null) {
+            accountRepository.delete(acc);
+            model.addAttribute("success", "Xoá tài khoản thành công!");
+        } else {
+            model.addAttribute("error", "Không tìm thấy tài khoản để xoá!");
         }
-        return "redirect:/admin/accounts";
+        model.addAttribute("accounts", accountRepository.findAll());
+        return "accounts";
     }
 }
