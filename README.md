@@ -1,138 +1,499 @@
 # Group 9 — Dự án Game 2D
 
 ## Thành viên 👥
-- **Lê Phạm Thành Đạt** — 23010541  
-- **Bùi Hoài Anh** — 23010294  
-- **Đỗ Văn Duy** — 23017211  
-
+- **Lê Phạm Thành Đạt**(23010541)-ID: liliusgamer.
+- **Bùi Hoài Anh**(23010294)-ID:bhanh92.
+- **Đỗ Văn Duy**(23017211)-ID:dovanduy2005.
+- **Nguyễn Lệ Thu**(Giảng viên)-ID:nglthu.
 ---
-**I - Tiêu đề**
-Thiết kế và phát triển Game 2D Phiêu lưu: Lạc Trong Rừng Cấm
-
-**CLASS DIAGRAM**
-![image](https://github.com/user-attachments/assets/68b6fc70-5e0b-4a1c-a9c4-efb157201752)
+**I - Tiêu đề:**
+Thiết kế và phát triển Game 2D:Hệ thống game "Lạc Trong Rừng Cấm".
 
 
-II - Đối tượng
-- Nhân vật chính (Main Character / Player):
-Vai trò: Là đối tượng điều khiển chính trong game, do người chơi điều khiển để di chuyển, nhảy, chiến đấu và tương tác với môi trường.
-Thuộc tính: Vị trí, tốc độ di chuyển, máu (HP), trạng thái (đang đứng, tấn công...), hoạt ảnh (animation).
-Hành vi: Di chuyển trái/phải, tấn công, nhận sát thương, tương tác với vật phẩm hoặc NPC.
+**II - Đối tượng:** Phân tích 4 đối tượng bao gồm: account, player, enemy, game.
 
-Sơ đồ Sequence Diagram — Hành vi Nhân vật chính (Player) :
-![Sequence Diagram Hành vi Nhân vật chính (Player)](https://github.com/user-attachments/assets/6c6690c0-f128-4466-96fe-0eed8fad4825)
+    1. Đối tượng tài khoản (account):
 
-
-- Kẻ thù (Enemy):
-Vai trò: Gây thử thách cho người chơi, tạo nên tính đối kháng và tăng độ khó.
-Thuộc tính: Vị trí, sát thương, máu, phạm vi phát hiện người chơi, hoạt ảnh.
-Hành vi: Tuần tra, đuổi theo người chơi, tấn công khi đến gần, chết khi hết máu.
-
-Sơ đồ Activity Diagram — Hành vi Kẻ thù (Enemy):
-![522d8907-ed9d-49c9-ae5a-c56d992e6aa7](https://github.com/user-attachments/assets/7a075773-f671-4826-a287-5cafd910447b)
-
-
-- Vật phẩm (Item):
-Vai trò: Hỗ trợ người chơi trong quá trình chơi game, tăng tính hấp dẫn và khám phá.
-Thuộc tính: Loại vật phẩm (hồi máu, tăng tốc độ, chìa khóa...), vị trí, hiệu ứng khi nhặt.
-Hành vi: Nằm cố định trên bản đồ, biến mất khi được nhặt, kích hoạt hiệu ứng hỗ trợ cho người chơi.
-
- Sơ đồ State Machine Diagram — Hành vi Vật phẩm (Item):
- ![tải xuống](https://github.com/user-attachments/assets/06fedcad-e97b-494d-a647-0462ed6c11ea)
+  1.1 Miêu tả thông tin của tài khoản:
+  
+ + Mã tài khoản (id).
+ + Tên đăng nhập (username) - unique.
+ + Mật khẩu (password).
+ + Danh sách nhân vật thuộc về tài khoản.
+   
+  1.2 Phương thức hoạt động liên quan đến đối tượng tài khoản:
+  
+ + Đăng ký tài khoản mới.
+ + Đăng nhập vào hệ thống.
+ + Hiển thị thông tin tài khoản.
+ + Quản lý danh sách nhân vật.
 
 
+       2. Đối tượng nhân vật (player):
 
-III - Cấu trúc Folder.
+   
+2.1 Miêu tả thông tin của nhân vật:
 
-Gồm có 2 folder: scr (source code), res (resource).
+ + Mã nhân vật (id).
+ + Tên nhân vật (name).
+ + Cấp độ (level).
+ + Avatar (hình ảnh nhân vật).
+ + Tài khoản sở hữu (account_id).
+   
+2.2 Phương thức hoạt động liên quan đến đối tượng nhân vật:
 
-Trong scr gồm có các lớp:
-- characters: Class cho nhân vật, kẻ thù
-- items: Class cho vật phẩm
-- tests: Kiểm định
-- Main: Lớp chính để chạy game
+ + Tạo nhân vật mới.
+ + Hiển thị thông tin nhân vật.
+ + Cập nhật cấp độ nhân vật.
+ + Chọn nhân vật để chơi game.
 
-Trong res gồm có:
-- images: hình ảnh
-- sounds: âm thanh
-- maps: bản đồ
+       3. Đối tượng quái vật (enemy):
+   
+3.1 Miêu tả thông tin của quái vật:
 
-IV - P4
-1. Giao diện:
-Sử dụng Java Spring Boot với Thymeleaf hoặc REST API + Swagger/Postman để thao tác CRUD.
+ + Mã quái vật (id).
+ + Tên quái vật (name).
+ + Cấp độ (level).
+ + Sát thương (damage).
+   
+3.2 Phương thức hoạt động liên quan đến đối tượng quái vật:
+   
+ + Tạo quái vật mới.
+ + Hiển thị thông tin quái vật.
+ + Cập nhật thông số quái vật.
+ + Sử dụng trong game logic.
 
-2. Chức năng quản lý nhân vật (Đối tượng 01: Character)
-Thêm, sửa, xoá nhân vật (tên, level, HP, MP, class như "warrior", "mage")
+       4. Đối tượng game:
+   
+4.1 Miêu tả thông tin của game:
 
-Liệt kê danh sách nhân vật
+ + Trạng thái game.
+ + Nhân vật đang chơi.
+ + Quái vật hiện tại.
+ + Điểm số và tiến trình.
+   
+4.2 Phương thức hoạt động liên quan đến đối tượng game:
 
-Lọc theo class, level, giới tính...
+ + Khởi tạo game mới.
+ + Chọn nhân vật.
+ + Xử lý logic game.
+ + Cập nhật trạng thái game.
 
-3. Chức năng quản lý bản đồ (Đối tượng 02: Map)
-Thêm, sửa, xoá bản đồ (tên map, loại map: rừng, hang động, thành phố)
+   **III- Cấu trúc folder :**
+        ### 📁 Cấu trúc thư mục Project
 
-Gán nhân vật cho bản đồ (nhân vật đang ở đâu)
+       plaintext
+       springbootApp/complete/
+       ├── src/
+       │   ├── main/
+       │   │   ├── java/
+       │   │   │   └── com/example/servingwebcontent/
+       │   │   │       ├── ServingWebContentApplication.java
+       │   │   │       ├── AccountController.java
+       │   │   │       ├── PlayerController.java
+       │   │   │       ├── EnemyController.java
+       │   │   │       ├── GameController.java
+       │   │   │       ├── database/
+       │   │   │       │   ├── aivenConnection.java
+       │   │   │       │   └── AccountAiven.java
+       │   │   │       └── model/
+       │   │   │           ├── Account.java
+       │   │   │           ├── Player.java
+       │   │   │           ├── Enemy.java
+       │   │   │           ├── AccountRepository.java
+       │   │   │           ├── PlayerRepository.java
+       │   │   │           └── EnemyRepository.java
+       │   │   └── resources/
+       │   │       ├── application.properties
+       │   │       ├── static/
+       │   │       │   ├── index.html
+       │   │       │   └── avatars/
+       │   │       │       ├── knight.png
+       │   │       │       ├── mage.png
+       │   │       │       └── archer.png
+       │   │       └── templates/
+       │   │           ├── login.html
+       │   │           ├── register.html
+       │   │           ├── accounts.html
+       │   │           ├── players.html
+       │   │           ├── enemies.html
+       │   │           ├── choose-character.html
+       │   │           ├── game.html
+       │   │           └── error.html
+       │   └── test/
+       │       └── java/
+       │           └── com/example/servingwebcontent/
+       │               └── ServingWebContentApplicationTest.java
+       ├── target/
+       ├── pom.xml
+       ├── build.gradle
+       └── README.md
+    **IV- Chức năng của từng đối tượng :**
 
-4. Chức năng quản lý nhiệm vụ (Đối tượng 03: Quest)
-Thêm, sửa, xoá nhiệm vụ (tiêu đề, mô tả, phần thưởng)
+Chúng em viết 15+ class cho 4 đối tượng xác định được ở câu 2 (bao gồm main và các class hỗ trợ). 
+- Với đối tượng account ta có: class Account, AccountRepository, AccountController, AccountAiven.
+- Với đối tượng player ta có: class Player, PlayerRepository, PlayerController  .
+- Với đối tượng enemy ta có: class Enemy, EnemyRepository, EnemyController.
+- Với đối tượng game ta có: class GameController, ServingWebContentApplication.
+- Các class hỗ trợ: aivenConnection, các template HTML.
 
-Gán nhiệm vụ cho nhân vật
+   **V- Kiểm nghiệm các chức năng của từng đối tượng :**
 
-5. Chức năng mở rộng (tuỳ chọn):
-Tìm nhân vật có level cao nhất
+Để kiểm tra tính đúng đắn và ổn định của lớp Account, chúng tôi thực hiện kiểm thử cho các chức năng chính sau:
+  - Đăng ký tài khoản, đăng nhập, hiển thị thông tin tài khoản, quản lý danh sách nhân vật.
 
-Thống kê số nhân vật trên từng bản đồ
+Để kiểm tra tính đúng đắn và ổn định của lớp Player, chúng tôi thực hiện kiểm thử cho các chức năng chính sau:
+  - Tạo nhân vật mới, hiển thị thông tin nhân vật, cập nhật cấp độ, chọn nhân vật để chơi game.
 
-Xuất dữ liệu sang JSON hoặc file CSV
+Để kiểm tra tính đúng đắn và ổn định của lớp Enemy, chúng tôi thực hiện kiểm thử cho các chức năng chính sau:
+  - Tạo quái vật mới, hiển thị thông tin quái vật, cập nhật thông số và sử dụng trong game logic.
+    
+Để kiểm tra tính đúng đắn và ổn định của lớp Game, chúng tôi thực hiện kiểm thử cho các chức năng chính sau:
+  - Khởi tạo game, chọn nhân vật, xử lý logic game và cập nhật trạng thái game.
 
-Lưu checkpoint (bản đồ + nhiệm vụ + trạng thái nhân vật)
+    **VI-Nội dung chính cho từng đối tượng  :**
+    
+        Xây dựng ứng dụng game web "Lạc Trong Rừng Cấm"
 
-**Phân tích chức năng chính thành các chức năng nhỏ**
+    Yêu cầu:
+    
+- Giao diện Java Spring Boot.
+- Có chức năng quản lý tài khoản, nhân vật, quái vật và game logic.
+- Và các chức năng khác.
 
-Đạt	Viết class Player và thêm thuộc tính level, viết phương thức showHighLevelPlayers(int level)
+  Cụ thể: 
+- Có chức năng quản lý tài khoản (account):
+  
+  + Thêm, sửa, xóa tài khoản .
+  + Liệt kê thông tin về tài khoản.
+  + Đăng ký và đăng nhập hệ thống.
+    
+- Có chức năng quản lý nhân vật (player):
+  
+  + Thêm, sửa, xóa nhân vật.
+  + Hiển thị thông tin nhân vật.
+  + Cập nhật cấp độ nhân vật.
+  + Chọn nhân vật để chơi game.
 
-Duy	Tạo danh sách các Player và thêm dữ liệu demo
+- Có chức năng quản lý quái vật (enemy):
+  
+  + Thêm, sửa, xóa quái vật.
+  + Hiển thị thông tin quái vật.
+  + Cập nhật thông số quái vật.
+  + Sử dụng trong game logic.
+  
+- Có chức năng quản lý game:
+  
+  + Khởi tạo game mới.
+  + Chọn nhân vật.
+  + Xử lý logic game.
+  + Cập nhật trạng thái game.
 
-Hoài Anh	Thực hiện kiểm thử chức năng trong file TestObjectList
+ - Dữ liệu được lưu trữ trong MySQL Database:
+   
+  + Cần tạo các bảng liên quan đến tài khoản, nhân vật, quái vật và game để lưu trữ dữ liệu.
 
-
-**Lưu đồ thuật toán (Flowchart)**
-+-------------------------------+
-| Nhập ngưỡng level (threshold)|
-+-------------------------------+
-              |
-              v
-+-------------------------------+
-| Duyệt từng đối tượng trong    |
-| danh sách Player              |
-+-------------------------------+
-              |
-              v
-+-------------------------------+
-| Player có level >= threshold?|
-+-------------------------------+
-        | YES            | NO
-        v                v
-+-----------------+     (Bỏ qua)
-| Hiển thị Player |
-+-----------------+
-        |
-        v
-+-------------------------+
-| Tiếp tục đến Player sau|
-+-------------------------+
-        |
-        v
-+----------------------+
-|   Kết thúc chương trình |
-+----------------------+
-
-
-
-![494869075_539016669148616_841506361584777237_n](https://github.com/user-attachments/assets/ff4dd3ae-f10c-45bf-a2aa-399447a431af)
-
-
+ - Khi làm việc với dữ liệu trong bộ nhớ, dữ liệu cần được lưu trữ dưới dạng các Collection tùy chọn như ArrayList, LinkedList, Map, ... thông qua JPA Repository.
+   ## Class Diagram :
+   
 
 
+       +---------------------+       +------------------------+        +----------------------+
+       |       User          |<------>|       Account         |        |       Player         |
+       +---------------------+       +------------------------+        +----------------------+
+       | - userID            |       | - id: Long             |        | - id: Long           |
+       | - name              |       | - username: String     |        | - name: String       |
+       | - gender            |       | - password: String     |        | - level: int         |
+       | - birthDate         |       | - players              |        | - avatar: String     |
+       | - phoneNumber       |       +------------------------+        | - account: Account   |
+       | - email             |                 |                       +----------------------+
+       | - address           |                 ▼                                  │
+       |                     |                                                    ▼ 
+       | - password          |       +-------------------+           +----------------------+
+       | - userType          |       |       Enemy       |           |      GameController  |
+       +---------------------+       +-------------------+           +----------------------+
+       | + getUser()         |       | - id: Long        |           | + startGame()        |
+       | + getName()         |       | - name: String    |           | + saveGame()         |
+       | + getGender()       |       | - level: int      |           | + loadGame()         |
+       | + getBirthDate()    |       | - damage: int     |           | + updateGameStatus() |
+       | + getEmail()        |       +-------------------+           +----------------------+
+       | + getPhoneNumber()  |             |
+       | + getAddress()      |             ▼
+       | + getPassword()     |       +-------------------+         +------------------------+
+       | + getUserType()     |       |  EnemyRepository  |        |   AccountController     |
+       | + setUser()         |       +-------------------+         +------------------------+
+       | + login()           |       | + findAll()       |        | + login()               |
+       | + showUser()        |       | + findById()      |        | + register()            |
+       +---------------------+       | + save()          |        | + listAccounts()        |
+                                     | + delete()        |        | + addAccount()          |
+                                     +-------------------+        | + editAccount()         |
+                                                                  | + deleteAccount()       |
+                                                                  +-------------------------+
 
+
+     ## ACTIVITY DIAGRAM - ĐĂNG NHẬP:
+   
+       ┌──────────────────────────────┐
+       │           Start              │
+       └─────────────┬────────────────┘
+                     │
+                     ▼
+       ┌──────────────────────────────┐
+       │   Nhập username, password    │
+       └─────────────┬────────────────┘
+                     │
+                     ▼
+       ┌───────────────────────────────┐
+       │   Kiểm tra thông tin hợp lệ?  │
+       └───────┬─────────────┬─────────┘
+               │             │
+          Không│             │Có
+               ▼             ▼
+       ┌────────────────┐  ┌───────────────────────────────┐
+       │  Thông báo lỗi │  │      Đăng nhập thành công     │
+       └───────┬────────┘  └─────────────┬─────────────────┘
+               │                         │
+               └─────────────┬───────────┘
+                             ▼
+                       ┌───────────┐
+                       │    End    │
+                       └───────────┘
+
+
+    ## ACTIVITY DIAGRAM - CHỌN NHÂN VẬT:
+
+       ┌──────────────────────────────┐
+       │            Start             │
+       └─────────────┬────────────────┘
+                     │
+                     ▼
+       ┌──────────────────────────────┐
+       │  Hiển thị danh sách nhân vật │
+       └─────────────┬────────────────┘
+                     │
+                     ▼
+       ┌──────────────────────────────┐
+       │   Người dùng chọn nhân vật   │
+       └─────────────┬────────────────┘
+                     │
+                     ▼
+       ┌──────────────────────────────┐
+       │   Lưu lựa chọn & chuyển game │
+       └─────────────┬────────────────┘
+                     │
+                     ▼
+               ┌──────────┐
+               │    End   │
+               └──────────┘
+
+
+   ## ACTIVITY DIAGRAM - QUẢN LÝ NHÂN VẬT:
+
+
+        ┌─────────────────────────────┐
+        │           Start             │
+        └─────────────┬───────────────┘
+                      │
+                      ▼
+        ┌──────────────────────────────┐
+        │  Hiển thị danh sách nhân vật │
+        └─────────────┬────────────────┘
+                      │
+                      ▼
+        ┌───────────────────────────────┐
+        │   [Thêm/Sửa/Xóa] nhân vật?    │
+        └───────┬─────────────┬─────────┘
+                │             │
+           Thêm │        Sửa/Xóa
+                ▼             ▼
+        ┌────────────────┐  ┌──────────────────────────────┐
+        │  Nhập thông tin│  │   Chọn nhân vật cần sửa/xóa  │
+        │  nhân vật mới  │  └─────────────┬────────────────┘
+        └───────┬────────┘                │
+                │                         ▼
+                └─────────────┬───────────┘
+                              ▼
+                        ┌───────────────┐
+                        │  Cập nhật DB  │
+                        └───────────────┘
+                              │
+                              ▼
+                        ┌───────────────┐
+                        │    End        │
+                        └───────────────┘
+
+
+
+   🎯 Hướng dẫn sử dụng:
+   
+ 1. Đăng ký tài khoản:
+
+ -Truy cập trang chủ.
+ 
+ -Nhấn "Đăng Ký".
+ 
+ -Nhập username và password.
+ 
+ -Nhấn "Đăng Ký" để tạo tài khoản mới.
+
+ 2. Đăng nhập:
+    
+ -Từ trang chủ, nhấn "Đăng Nhập".
+ 
+ -Nhập username và password đã đăng ký.
+ 
+ -Nhấn "Đăng Nhập" để vào hệ thống.
+
+ 3. Chọn nhân vật:
+    
+ -Sau khi đăng nhập, hệ thống hiển thị danh sách nhân vật.
+ 
+ -Chọn nhân vật để bắt đầu chơi game.
+
+  4. Quản lý dữ liệu:
+     
+ -Quản lý tài khoản: /accounts.
+ 
+ -Quản lý nhân vật: /players.
+ 
+ -Quản lý quái vật: /enemies.
+
+ 🛠️ API Endpoints
+
+   Account Management:
+ 
+ -GET /accounts - Danh sách tài khoản.
+ 
+ -GET /accounts/add - Form thêm tài khoản.
+ 
+ -POST /accounts/add - Thêm tài khoản.
+ 
+ -GET /accounts/edit/{id} - Form sửa tài khoản.
+ 
+ -POST /accounts/edit/{id} - Sửa tài khoản.
+ 
+ -GET /accounts/delete/{id} - Xóa tài khoản.
+
+   Player Management:
+   
+- GET /players - Danh sách nhân vật.
+  
+ -GET /players/add - Form thêm nhân vật.
+ 
+ -POST /players/add - Thêm nhân vật.
+ 
+ -GET /players/edit/{id} - Form sửa nhân vật. 
+ 
+ -POST /players/edit/{id} - Sửa nhân vật.
+ 
+ -GET /players/delete/{id} - Xóa nhân vật.
+
+   Enemy Management:
+  
+ -GET /enemies - Danh sách quái vật.
+ 
+ -GET /enemies/add - Form thêm quái vật.
+ 
+ -POST /enemies/add - Thêm quái vật.
+ 
+ -GET /enemies/edit/{id} - Form sửa quái vật.
+ 
+ -POST /enemies/edit/{id} - Sửa quái vật.
+ 
+ -GET /enemies/delete/{id} - Xóa quái vật.
+
+ 🗄️ Cấu trúc Database:
+ 
+ Bảng accounts:
+ 
+ -id (Primary Key).
+ 
+ -username (Unique, Not Null).
+ 
+ -password (Not Null).
+ 
+ -Bảng players.
+ 
+ -id (Primary Key).
+ 
+ -name (Not Null).
+ 
+ -level (Integer).
+ 
+ -avatar (String).
+ 
+ -account_id (Foreign Key to accounts).
+
+ Bảng enemies:
+ 
+ -id (Primary Key).
+ 
+ -name (Not Null).
+ 
+ -level (Integer).
+ 
+ -damage (Integer).
+
+ 🚀 Tính năng nâng cao
+ 
+   *Đã triển khai:
+   
+✅ Hệ thống đăng ký/đăng nhập.
+
+✅ Quản lý CRUD cho tài khoản, nhân vật, quái vật.
+
+✅ Giao diện responsive.
+
+✅ Kết nối database cloud (Aiven).
+
+✅ Hệ thống avatar nhân vật.
+
+  *Có thể phát triển thêm:
+  
+🔄 Hệ thống combat (chiến đấu).
+
+🔄 Hệ thống inventory (túi đồ). 
+
+🔄 Hệ thống quest (nhiệm vụ). 
+
+🔄 Hệ thống leveling (lên cấp).
+
+🔄 Multiplayer support.
+
+🔄 Real-time chat.
+
+🔄 Leaderboard.
+
+
+
+ ## Phân công công việc:
+
+| Thành viên |              Nhiệm vụ              |
+|------------|------------------------------------|
+|   Đạt      | Quản lý tài khoản và đăng nhập     | 
+|   Hoài Anh | Quản lý nhân vật và chọn nhân vật  |
+|   Duy      | Quản lý quái vật và game logic     |
+
+
+                                                           
+
+  
+
+   
+
+
+   
+
+   
+
+
+
+
+
+ 
+
+
+
+
+  
 
