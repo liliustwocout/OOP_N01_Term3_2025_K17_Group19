@@ -448,8 +448,6 @@ Chúng em viết 15+ class cho 4 đối tượng xác định được ở câu 
 ✅ Hệ thống avatar nhân vật.
 
   *Có thể phát triển thêm:
-  
-🔄 Hệ thống combat (chiến đấu).
 
 🔄 Hệ thống inventory (túi đồ). 
 
