@@ -584,9 +584,7 @@ Chúng em viết 15+ class cho 4 đối tượng xác định được ở câu 
 3. Chạy `mvn spring-boot:run` hoặc `./gradlew bootRun`.
 4. Truy cập `http://localhost:8080`.
 
-### Testing:
-- Chạy các test cases trong thư mục `src/test/`.
-- Sử dụng JUnit để kiểm tra các chức năng.
+
 
 ## 📝 Ghi chú.
 
