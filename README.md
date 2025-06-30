@@ -1,4 +1,4 @@
-![Screenshot 2025-07-01 003737](https://github.com/user-attachments/assets/0c8d2855-8c25-4c05-91de-dcec8c00704d)# Group 19 — Dự án Game 2D OOP
+**# Group 19 — Dự án Game 2D OOP**
 
 ## Thành viên 👥
 - **Lê Phạm Thành Đạt** (23010541) - ID: liliusgamer.
@@ -156,6 +156,7 @@ OOP_N01_Term3_2025_K17_Group19-main/
 │       │   ├── target/
 │       │   ├── pom.xml
 │       │   ├── build.gradle
+│       │   ├── mvnw.xml
 │       │   └── README.md
 │       └── initial/
 ├── REVIEW/
