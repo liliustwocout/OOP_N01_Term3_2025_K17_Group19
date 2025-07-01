@@ -262,7 +262,7 @@ Chúng em viết 15+ class cho 4 đối tượng xác định được ở câu 
 
 ```
 +---------------------+       +------------------------+        +----------------------+
-|       Account       |<------>|       Player          |        |       Enemy          |
+|       Account       |<----->|       Player           |<------>|       Enemy          |
 +---------------------+       +------------------------+        +----------------------+
 | - id: Long          |       | - id: Long             |        | - id: Long           |
 | - username: String  |       | - name: String         |        | - name: String       |
