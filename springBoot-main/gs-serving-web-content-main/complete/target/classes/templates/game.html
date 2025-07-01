@@ -146,11 +146,11 @@
     <div class="game-header">
         <h1 class="game-title">🌲 Lạc Trong Rừng Cấm - 2D Adventure 🌲</h1>
         <div class="game-info">
-            <div class="info-item">Nhân vật: <span th:text="${playerName}"></span></div>
-            <div class="info-item">Máu: <span id="player-hp" th:text="${playerMaxHp}"></span>/<span th:text="${playerMaxHp}"></span></div>
+            <div class="info-item">Nhân vật: <span th:text="${playerName}" id="player-name"></span></div>
+            <div class="info-item">Máu: <span id="player-hp" th:text="${playerMaxHp}"></span>/<span id="player-max-hp" th:text="${playerMaxHp}"></span></div>
             <div class="info-item">Rương: <span id="chests-collected">0</span>/3</div>
             <div class="info-item">Điểm: <span id="score">0</span></div>
-            <a href="/choose-character?username=[[${username}]]" class="logout-btn" style="background: #f39c12;">🔄 Đổi Nhân Vật</a>
+            <a id="change-character-link" th:href="@{/choose-character(username=${username})}" class="logout-btn" style="background: #f39c12;">🔄 Đổi Nhân Vật</a>
             <a href="/login" class="logout-btn">Đăng xuất</a>
         </div>
     </div>
@@ -171,15 +171,27 @@
         </div>
         
         <div class="game-status" id="game-status">
-            Chào mừng <span th:text="${playerName}"></span> đến với Lạc Trong Rừng Cấm! Di chuyển để nhặt rương và đánh quái vật.
+            Chào mừng <span id="player-name"></span> đến với Lạc Trong Rừng Cấm! Di chuyển để nhặt rương và đánh quái vật.
         </div>
     </div>
+
+    <script>
+        // Các biến này sẽ được backend render trực tiếp giá trị khi trả về HTML
+        window.username = "${username}";
+        window.playerId = "${playerId}";
+        window.playerName = "${playerName}";
+        window.playerLevel = "${playerLevel}";
+        window.playerAttack = "${playerAttack}";
+        window.playerDefense = "${playerDefense}";
+        window.playerMaxHp = "${playerMaxHp}";
+        window.playerAvatar = "${playerAvatar}";
+    </script>
 
     <script th:inline="javascript">
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         
-        // Lấy thông tin nhân vật từ server
+        // Lấy thông tin nhân vật từ server (dùng Thymeleaf để render biến)
         const playerData = {
             id: /*[[${playerId}]]*/ 1,
             name: /*[[${playerName}]]*/ "Player",
@@ -187,7 +199,8 @@
             attack: /*[[${playerAttack}]]*/ 10,
             defense: /*[[${playerDefense}]]*/ 5,
             maxHp: /*[[${playerMaxHp}]]*/ 100,
-            avatar: /*[[${playerAvatar}]]*/ "knight.png"
+            avatar: /*[[${playerAvatar}]]*/ "knight.png",
+            username: /*[[${username}]]*/ "username"
         };
         
         // Debug: Log player data
@@ -263,6 +276,10 @@
             tree: '#228B22',
             grass: '#90EE90'
         };
+        
+        // Load player avatar image
+        const playerAvatarImg = new Image();
+        playerAvatarImg.src = '/static/avatars/' + playerData.avatar;
         
         // Game loop
         function gameLoop() {
@@ -477,8 +494,12 @@
         
         // Draw player
         function drawPlayer() {
-            ctx.fillStyle = colors.player;
-            ctx.fillRect(gameState.player.x, gameState.player.y, gameState.player.width, gameState.player.height);
+            if (playerAvatarImg.complete && playerAvatarImg.naturalWidth > 0) {
+                ctx.drawImage(playerAvatarImg, gameState.player.x, gameState.player.y, gameState.player.width, gameState.player.height);
+            } else {
+                ctx.fillStyle = colors.player;
+                ctx.fillRect(gameState.player.x, gameState.player.y, gameState.player.width, gameState.player.height);
+            }
             
             // Draw player details
             ctx.fillStyle = '#2980b9';
@@ -668,6 +689,7 @@
         // Update UI
         function updateUI() {
             document.getElementById('player-hp').textContent = gameState.player.hp;
+            document.getElementById('player-max-hp').textContent = gameState.player.maxHp;
             document.getElementById('chests-collected').textContent = gameState.chests.filter(c => c.collected).length;
             document.getElementById('score').textContent = gameState.score;
         }
