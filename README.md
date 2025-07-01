@@ -122,9 +122,6 @@ OOP_N01_Term3_2025_K17_Group19-main/
 │       │   │   │   │       ├── PlayerController.java
 │       │   │   │   │       ├── EnemyController.java
 │       │   │   │   │       ├── GameController.java
-│       │   │   │   │       ├── database/
-│       │   │   │   │       │   ├── aivenConnection.java
-│       │   │   │   │       │   └── AccountAiven.java
 │       │   │   │   │       └── model/
 │       │   │   │   │           ├── Account.java
 │       │   │   │   │           ├── Player.java
@@ -162,13 +159,7 @@ OOP_N01_Term3_2025_K17_Group19-main/
 ├── REVIEW/
 │   ├── Selector.java
 │   ├── Sequence.java
-│   └── TestSequence.java
-└── img/
-    ├── giaodien.png
-    ├── test.png
-    ├── test2.png
-    ├── Untitle.png
-    └── Untitled.png
+└── └── TestSequence.java 
 ```
 
 ## IV - Chức năng của từng đối tượng.
