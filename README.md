@@ -1,7 +1,7 @@
 **# Group 19 — Dự án Game 2D OOP**
 
 ## Thành viên 👥
-- **Lê Phạm Thành Đạt** (23010541) - ID: liliusgamer.
+- **Lê Phạm Thành Đạt** (23010541) - ID: liliustwocout.
 - **Bùi Hoài Anh** (23010294) - ID: bhanh92.  
 - **Đỗ Văn Duy** (23017211) - ID: dovanduy2005.
 - **Nguyễn Lệ Thu** (Giảng viên) - ID: nglthu.
